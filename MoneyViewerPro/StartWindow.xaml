@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoneyViewerPro"
         mc:Ignorable="d"
-        Title="Start - Money Viewer Pro" Height="165" Width="250" ResizeMode="NoResize" Icon="cash.ico">
+        Title="Start - Money Viewer Pro" Height="175" Width="260" ResizeMode="NoResize" Icon="cash.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
