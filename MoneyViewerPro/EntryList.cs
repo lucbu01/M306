@@ -14,6 +14,10 @@ namespace MoneyViewerPro
             this.entries = entries;
         }
 
+        public void addEntry(Entry entry) {
+            entries.Add(entry);
+        }
+
         public List<Entry> filter(DateTime startDate, DateTime endDate) {
             List<Entry> result = new List<Entry>();
             foreach (Entry entry in entries)
