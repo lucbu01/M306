@@ -10,10 +10,12 @@ namespace MoneyViewerPro
     {
         public int id { get; private set; }
         public String name { get; set; }
+        public String description { get; set; }
 
-        public Category(int id, String name) {
+        public Category(int id, String name, String description) {
             this.id = id;
             this.name = name;
+            this.description = description;
             CategoryList.addCategory(this);
         }
     }
