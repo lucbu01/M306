@@ -17,11 +17,39 @@ namespace MoneyViewerPro
     /// <summary>
     /// Interaktionslogik für Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class StartWindow : Window
     {
-        public Window1()
+        public enum StartWindowOptions
+        {
+            OPEN,
+            SAVE
+        }
+        private EntryList entries;
+        private CategoryList categories;
+        private StartWindowOptions options;
+        public bool Successful { get; set; } = false;
+
+        public StartWindow()
         {
             InitializeComponent();
+        }
+
+        public StartWindow(EntryList entries, CategoryList categories, StartWindowOptions options)
+        {
+            this.entries = entries;
+            this.categories = categories;
+            this.options = options;
+        }
+
+        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnNew_Click(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show();
+            Close();
         }
     }
 }

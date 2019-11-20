@@ -13,5 +13,6 @@ namespace MoneyViewerPro
     /// </summary>
     public partial class App : Application
     {
+
     }
 }
