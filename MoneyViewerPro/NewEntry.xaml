@@ -27,7 +27,7 @@
         </WrapPanel>
         <Label Grid.Row="1" Margin="5,0,5,0">Datum</Label>
         <DatePicker Name="datName" Grid.Row="2" Margin="5,0,5,5" Width="200" HorizontalAlignment="Left"/>
-        <Label Grid.Row="3" Margin="5,0,5,0">Datum</Label>
+        <Label Grid.Row="3" Margin="5,0,5,0">Kategorie</Label>
         <ComboBox Name="cmbCategory" Grid.Row="4" Margin="5,0,5,5" Width="200" HorizontalAlignment="Left"/>
         <Label Grid.Row="5" Margin="5,0,5,0">Beschreibung</Label>
         <TextBox Name="txbDescription" Grid.Row="6" Margin="5,0,5,5" Width="500" Height="100" HorizontalAlignment="Left"/>
