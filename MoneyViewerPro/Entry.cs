@@ -20,7 +20,6 @@ namespace MoneyViewerPro
             this.description = description;
             this.value = value;
             this.dateTime = dateTime;
-            EntryList.addEntry(this);
         }
     }
 }

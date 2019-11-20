@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace MoneyViewerPro
 {
-    static class EntryList
+    class EntryList
     {
-        public static  List<Entry> entries{ get; set; }
+        public List<Entry> entries{ get; set; }
 
-        public static void addEntry(Entry entry) {
+        public EntryList(List<Entry> entries)
+        {
+            this.entries = entries;
+        }
+
+        public void addEntry(Entry entry) {
             entries.Add(entry);
         }
 
-        public static List<Entry> filter(DateTime startDate, DateTime endDate) {
+        public List<Entry> filter(DateTime startDate, DateTime endDate) {
             List<Entry> result = new List<Entry>();
             foreach (Entry entry in entries)
             {
@@ -25,7 +30,7 @@ namespace MoneyViewerPro
             }
             return result;
         }
-        public static List<Entry> filter(int categoryId)
+        public List<Entry> filter(int categoryId)
         {
             List<Entry> result = new List<Entry>();
             foreach (Entry entry in entries) {
@@ -35,7 +40,7 @@ namespace MoneyViewerPro
             }
             return result;
         }
-        public static List<Entry> filter(int categoryId, DateTime startDate, DateTime endDate)
+        public List<Entry> filter(int categoryId, DateTime startDate, DateTime endDate)
         {
             List<Entry> result = new List<Entry>();
             foreach (Entry entry in entries)

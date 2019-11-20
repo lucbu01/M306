@@ -16,7 +16,6 @@ namespace MoneyViewerPro
             this.id = id;
             this.name = name;
             this.description = description;
-            CategoryList.addCategory(this);
         }
     }
 }
