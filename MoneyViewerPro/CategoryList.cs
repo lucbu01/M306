@@ -6,22 +6,27 @@ using System.Threading.Tasks;
 
 namespace MoneyViewerPro
 {
-    class CategoryList
+    public class CategoryList
     {
-        public List<Category> categoryList { get; set; }
+        public List<Category> categories { get; set; }
 
-        public CategoryList(List<Category> category)
+        public CategoryList()
         {
-            categoryList = category;
+            this.categories = new List<Category>();
+        }
+
+        public CategoryList(List<Category> categories)
+        {
+            this.categories = categories;
         }
 
         public void addCategory(Category category)
         {
-            categoryList.Add(category);
+            categories.Add(category);
         }
 
         public Category getCategoryById(int id) {
-            foreach (Category category in categoryList) {
+            foreach (Category category in categories) {
                 if (category.id == id) {
                     return category;
                 }

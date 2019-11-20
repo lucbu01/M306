@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace MoneyViewerPro
 {
-    class EntryList
+    public class EntryList
     {
         public List<Entry> entries{ get; set; }
+
+        public EntryList()
+        {
+            this.entries = new List<Entry>();
+        }
 
         public EntryList(List<Entry> entries)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoneyViewerPro
 {
-    class Entry
+    public class Entry
     {
         public int id { get; private set; }
         public int categoryId { get; set; }
