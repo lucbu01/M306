@@ -1,0 +1,26 @@
+﻿<Window x:Class="MoneyViewerPro.NewCategory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MoneyViewerPro"
+        mc:Ignorable="d"
+        Title="Neue Kategorie - Money Viewer Pro" Height="250" Width="520" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Margin="5,0,5,0">Name</Label>
+        <TextBox Name="txbName" Grid.Row="1" Margin="5,0,5,5" Width="200" HorizontalAlignment="Left"/>
+        <Label Grid.Row="2" Margin="5,0,5,0">Beschreibung</Label>
+        <TextBox Name="txbDescription" Grid.Row="3" Margin="5,0,5,5" Width="500" Height="100" HorizontalAlignment="Left"/>
+        <WrapPanel Grid.Row="4">
+            <Button Margin="10,5,5,5" Padding="5,2" Name="btnSave" IsDefault="True">Speichern</Button>
+            <Button Margin="5" Padding="5,2" Name="btnCancel" IsCancel="True">Abbrechen</Button>
+        </WrapPanel>
+    </Grid>
+</Window>
