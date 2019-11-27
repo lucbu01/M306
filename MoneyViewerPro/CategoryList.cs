@@ -25,9 +25,9 @@ namespace MoneyViewerPro
             categories.Add(category);
         }
 
-        public Category getCategoryById(int id) {
+        public Category getCategoryByName(string name) {
             foreach (Category category in categories) {
-                if (category.id == id) {
+                if (category.name == name) {
                     return category;
                 }
             }
