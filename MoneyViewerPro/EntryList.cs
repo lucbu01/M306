@@ -35,22 +35,22 @@ namespace MoneyViewerPro
             }
             return result;
         }
-        public List<Entry> filter(string categoryName)
+        public List<Entry> filter(Category category)
         {
             List<Entry> result = new List<Entry>();
             foreach (Entry entry in entries) {
-                if (entry.categoryName == categoryName) {
+                if (entry.category == category) {
                     result.Add(entry);
                 }
             }
             return result;
         }
-        public List<Entry> filter(string categoryName, DateTime startDate, DateTime endDate)
+        public List<Entry> filter(Category category, DateTime startDate, DateTime endDate)
         {
             List<Entry> result = new List<Entry>();
             foreach (Entry entry in entries)
             {
-                if (entry.dateTime >= startDate && entry.dateTime <= endDate && entry.categoryName == categoryName)
+                if (entry.dateTime >= startDate && entry.dateTime <= endDate && entry.category == category)
                 {
                     result.Add(entry);
                 }
