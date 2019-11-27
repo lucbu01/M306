@@ -14,14 +14,14 @@
         </Grid.RowDefinitions>
         <Menu HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Grid.Row="0">
             <MenuItem Header="_Datei">
-                <MenuItem Header="_Neu"/>
-                <MenuItem Header="_Öffnen"/>
-                <MenuItem Header="_Speichern" />
-                <MenuItem Header="Speichern _unter"/>
+                <MenuItem Header="_Neu" Click="newWindow"/>
+                <MenuItem Header="_Öffnen" Click="openFile"/>
+                <MenuItem Header="_Speichern" Name="mniSave" IsEnabled="False" Click="mniSave_Click"/>
+                <MenuItem Header="Speichern _unter" Click="mniSaveOn_Click"/>
             </MenuItem>
             <MenuItem Header="_Bearbeiten">
-                <MenuItem Header="Neue _Kategorie" />
-                <MenuItem Header="Neuer _Eintrag"/>
+                <MenuItem Header="Neue _Kategorie" Click="btnNewCategory_Click" />
+                <MenuItem Header="Neuer _Eintrag" Click="btnNewEntry_Click"/>
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1">
@@ -43,8 +43,8 @@
             <ComboBox Name="cmbYear" Margin="5,0,5,5" Width="140" Grid.Column="1" Grid.Row="1"></ComboBox>
             <Label Margin="5,5,5,0" Grid.Column="2" Grid.Row="0">Kategorie</Label>
             <ComboBox Name="cmbCategory" Margin="5,0,5,5" Width="140" Grid.Column="2" Grid.Row="1"></ComboBox>
-            <Button Margin="5" VerticalAlignment="Center" Grid.Column="4" Grid.Row="0" Grid.RowSpan="2">Neuer Eintrag</Button>
-            <Button Margin="5" VerticalAlignment="Center" Grid.Column="5" Grid.Row="0" Grid.RowSpan="2">Neue Kategorie</Button>
+            <Button Name="btnNewEntry" Margin="5" VerticalAlignment="Center" Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Click="btnNewEntry_Click">Neuer Eintrag</Button>
+            <Button Name="btnNewCategory" Margin="5" VerticalAlignment="Center" Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" Click="btnNewCategory_Click">Neue Kategorie</Button>
         </Grid>
         <Grid Grid.Row="2">
             

@@ -26,7 +26,7 @@ namespace MoneyViewerPro
         }
         private EntryList entries;
         private CategoryList categories;
-        private StartWindowOptions options;
+        private StartWindowOptions option = StartWindowOptions.OPEN;
         public bool Successful { get; set; } = false;
 
         public StartWindow()
@@ -36,9 +36,18 @@ namespace MoneyViewerPro
 
         public StartWindow(EntryList entries, CategoryList categories, StartWindowOptions options)
         {
+            InitializeComponent();
             this.entries = entries;
             this.categories = categories;
-            this.options = options;
+            this.option = options;
+            if(option == StartWindowOptions.SAVE)
+            {
+                this.btnNew.Content = "Abbrechen";
+                this.btnOpen.Content = "Speichern";
+                this.lblPassword.Content += " (optional)";
+                this.pwbPassword.IsEnabled = true;
+                this.Title = "Speichern - Money Viewer Pro";
+            }
         }
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
@@ -48,8 +57,16 @@ namespace MoneyViewerPro
 
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindow().Show();
-            Close();
+            if(option == StartWindowOptions.OPEN)
+            {
+                new MainWindow().Show();
+                Close();
+            }
+        }
+
+        private void txbFile_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
