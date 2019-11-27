@@ -19,9 +19,29 @@ namespace MoneyViewerPro
     /// </summary>
     public partial class NewCategory : Window
     {
-        public NewCategory()
+        private CategoryList categories;
+        public NewCategory(CategoryList categories)
         {
             InitializeComponent();
+            this.categories = categories;
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if(categories.categories.Find(category => category.name == txbName.Text) == null)
+            {
+                if(string.IsNullOrWhiteSpace(txbName.Text))
+                {
+                    MessageBox.Show(this, "Diese Kategorie existiert bereits", "Hinzufügen nicht möglich", MessageBoxButton.OK, MessageBoxImage.Error);
+                } else
+                {
+                    this.categories.addCategory(new Category(txbName.Text, txbDescription.Text));
+                    Close();
+                }
+            } else
+            {
+                MessageBox.Show(this, "Diese Kategorie existiert bereits", "Hinzufügen nicht möglich", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

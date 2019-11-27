@@ -78,7 +78,7 @@ namespace MoneyViewerPro
 
         private void btnNewCategory_Click(object sender, RoutedEventArgs e)
         {
-            NewCategory categoryWindow = new NewCategory();
+            NewCategory categoryWindow = new NewCategory(this.categories);
             categoryWindow.ShowDialog();
         }
 

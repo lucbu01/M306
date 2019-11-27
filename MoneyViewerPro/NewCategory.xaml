@@ -19,7 +19,7 @@
         <Label Grid.Row="2" Margin="5,0,5,0">Beschreibung</Label>
         <TextBox Name="txbDescription" Grid.Row="3" Margin="5,0,5,5" Width="500" Height="100" HorizontalAlignment="Left"/>
         <WrapPanel Grid.Row="4">
-            <Button Margin="10,5,5,5" Padding="5,2" Name="btnSave" IsDefault="True">Speichern</Button>
+            <Button Margin="10,5,5,5" Padding="5,2" Name="btnSave" IsDefault="True" Click="btnSave_Click">Speichern</Button>
             <Button Margin="5" Padding="5,2" Name="btnCancel" IsCancel="True">Abbrechen</Button>
         </WrapPanel>
     </Grid>
