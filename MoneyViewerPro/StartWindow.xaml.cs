@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace MoneyViewerPro
 {
@@ -66,6 +67,27 @@ namespace MoneyViewerPro
 
         private void txbFile_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+        }
+
+        private void btnFile_Click(object sender, RoutedEventArgs e)
+        {
+            FileDialog dialog;
+            if (option == StartWindowOptions.OPEN)
+            {
+                dialog = new OpenFileDialog();
+                dialog.Title = "File öffnen";
+            } else
+            {
+                dialog = new SaveFileDialog();
+                dialog.Title = "File speichern";
+            }
+            dialog.Filter = "Money Viever File (*.mvf)|*.mvf";
+            dialog.AddExtension = true;
+            if (dialog.ShowDialog() == true)
+            {
+                txbFile.Text = dialog.FileName;
+            }
 
         }
     }

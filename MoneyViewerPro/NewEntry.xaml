@@ -22,24 +22,24 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0">
-            <RadioButton Margin="5" GroupName="Type" Name="radEinnahmen">Einnahmen</RadioButton>
-            <RadioButton Margin="5" GroupName="Type" Name="radAusgaben">Ausgaben</RadioButton>
+            <RadioButton Margin="5" GroupName="Type" Name="radEinnahmen" Checked="radEinnahmen_Checked" Unchecked="radEinnahmen_Checked">Einnahmen</RadioButton>
+            <RadioButton Margin="5" GroupName="Type" Name="radAusgaben" Checked="radAusgaben_Checked" Unchecked="radAusgaben_Checked">Ausgaben</RadioButton>
         </WrapPanel>
         <Label Grid.Row="1" Margin="5,0,5,0">Datum</Label>
-        <DatePicker Name="datName" Grid.Row="2" Margin="5,0,5,5" Width="200" HorizontalAlignment="Left"/>
+        <DatePicker Name="datName" Grid.Row="2" Margin="5,0,5,5" Width="200" HorizontalAlignment="Left" SelectedDateChanged="datName_SelectedDateChanged"/>
         <Label Grid.Row="3" Margin="5,0,5,0">Kategorie</Label>
-        <ComboBox Name="cmbCategory" Grid.Row="4" Margin="5,0,5,5" Width="200" HorizontalAlignment="Left"/>
+        <ComboBox Name="cmbCategory" Grid.Row="4" Margin="5,0,5,5" Width="200" HorizontalAlignment="Left" DataContextChanged="cmbCategory_DataContextChanged"/>
         <Label Grid.Row="5" Margin="5,0,5,0">Beschreibung</Label>
-        <TextBox Name="txbDescription" Grid.Row="6" Margin="5,0,5,5" Width="500" Height="100" HorizontalAlignment="Left"/>
+        <TextBox Name="txbDescription" Grid.Row="6" Margin="5,0,5,5" Width="500" Height="100" HorizontalAlignment="Left" TextChanged="txbDescription_TextChanged"/>
         <Label Grid.Row="7" Margin="5,0,5,0">Preis</Label>
         <WrapPanel Grid.Row="8">
-            <TextBox Name="txbPrice" Margin="5,0,5,5" Width="100" HorizontalAlignment="Left"/>
-            <CheckBox Name="ckbIsFremdwaehrung">Fremdwährung</CheckBox>
+            <TextBox Name="txbPrice" Margin="5,0,5,5" Width="100" HorizontalAlignment="Left" TextChanged="txbPrice_TextChanged"/>
+            <CheckBox Name="ckbIsFremdwaehrung" Checked="ckbIsFremdwaehrung_Checked" Unchecked="ckbIsFremdwaehrung_Unchecked">Fremdwährung</CheckBox>
         </WrapPanel>
         <Label Grid.Row="9" Margin="5,0,5,0" IsEnabled="False">Währung</Label>
-        <TextBox Name="txbFremdwaehrung" Grid.Row="10" Margin="5,0,5,5" Width="50" HorizontalAlignment="Left" IsEnabled="False"/>
+        <TextBox Name="txbFremdwaehrung" Grid.Row="10" Margin="5,0,5,5" Width="50" HorizontalAlignment="Left" IsEnabled="False" TextChanged="txbFremdwaehrung_TextChanged"/>
         <WrapPanel Grid.Row="11">
-            <Button Margin="10,5,5,5" Padding="5,2" Name="btnSave" IsDefault="True" IsEnabled="False">Speichern</Button>
+            <Button Margin="10,5,5,5" Padding="5,2" Name="btnSave" IsDefault="True" IsEnabled="False" Click="btnSave_Click">Speichern</Button>
             <Button Margin="5" Padding="5,2" Name="btnCancel" IsCancel="True">Abbrechen</Button>
         </WrapPanel>
     </Grid>

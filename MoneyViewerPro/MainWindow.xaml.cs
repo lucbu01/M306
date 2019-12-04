@@ -43,6 +43,7 @@ namespace MoneyViewerPro
             InitializeComponent();
             this.entries = entries;
             this.categories = categories;
+            this.cmbCategory.ItemsSource = categories.categories;
         }
 
         public MainWindow(EntryList entries, CategoryList categories, string filename, string password)
@@ -72,7 +73,7 @@ namespace MoneyViewerPro
 
         private void btnNewEntry_Click(object sender, RoutedEventArgs e)
         {
-            NewEntry entryWindow = new NewEntry();
+            NewEntry entryWindow = new NewEntry(this.entries, this.categories);
             entryWindow.ShowDialog();
         }
 
