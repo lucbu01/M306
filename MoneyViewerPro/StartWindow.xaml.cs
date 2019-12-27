@@ -72,6 +72,17 @@ namespace MoneyViewerPro
 
         private void btnFile_Click(object sender, RoutedEventArgs e)
         {
+            /*
+            string encrypted = Encrypter.encrypt("teststring", "testpasswort");
+            MessageBox.Show(encrypted);
+            MessageBox.Show(Encrypter.decrypt(encrypted, "testpasswort"));
+            try
+            {
+                MessageBox.Show(Encrypter.decrypt(encrypted, "falschespasswort"));
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }*/
             FileDialog dialog;
             if (option == StartWindowOptions.OPEN)
             {

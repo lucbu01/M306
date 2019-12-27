@@ -93,7 +93,7 @@ namespace MoneyViewerPro
 
         private void txbFremdwaehrung_TextChanged(object sender, TextChangedEventArgs e)
         {
-            MessageBox.Show(ExchangeRate.getExchangeRate("EUR", "CHF").Factor.ToString());
+            //MessageBox.Show(ExchangeRate.getExchangeRate("EUR", "CHF").Factor.ToString());
             changed(sender, e);
         }
 

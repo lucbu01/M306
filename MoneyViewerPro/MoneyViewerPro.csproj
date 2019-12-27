@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CategoryList.cs" />
+    <Compile Include="Encrypter.cs" />
     <Compile Include="ExchangeRate.cs" />
     <Compile Include="FileLoader.cs" />
     <Compile Include="FileWriter.cs" />
