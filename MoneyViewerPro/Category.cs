@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,22 @@ using System.Threading.Tasks;
 
 namespace MoneyViewerPro
 {
+    [Serializable]
     public class Category
     {
-        public String name { get; set; }
-        public String description { get; set; }
+        [JsonProperty("name")]
+        public string name { get; set; } = "";
+        [JsonProperty("description")]
+        public string description { get; set; } = "";
 
-        public Category(String name, String description) {
+        public Category(string name, string description) {
             this.name = name;
             this.description = description;
+        }
+
+        public Category()
+        {
+
         }
     }
 }

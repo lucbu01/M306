@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,7 +54,17 @@ namespace MoneyViewerPro
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-
+            if(option == StartWindowOptions.SAVE)
+            {
+                if(string.IsNullOrWhiteSpace(pwbPassword.Password))
+                {
+                    FileWriter.write(new FileData(entries, categories), txbFile.Text);
+                } else
+                {
+                    FileWriter.write(new FileData(entries, categories), txbFile.Text, pwbPassword.Password);
+                }
+                Close();
+            }
         }
 
         private void btnNew_Click(object sender, RoutedEventArgs e)
@@ -67,7 +78,13 @@ namespace MoneyViewerPro
 
         private void txbFile_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            if(option == StartWindowOptions.OPEN)
+            {
+                btnOpen.IsEnabled = !string.IsNullOrWhiteSpace(txbFile.Text) && File.Exists(txbFile.Text);
+            } else
+            {
+                btnOpen.IsEnabled = !string.IsNullOrWhiteSpace(txbFile.Text);
+            }
         }
 
         private void btnFile_Click(object sender, RoutedEventArgs e)
@@ -98,6 +115,7 @@ namespace MoneyViewerPro
             if (dialog.ShowDialog() == true)
             {
                 txbFile.Text = dialog.FileName;
+                btnOpen.IsEnabled = true;
             }
 
         }

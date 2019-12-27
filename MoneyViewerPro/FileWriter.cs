@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Pipes;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,31 +15,31 @@ namespace MoneyViewerPro
 {
     class FileWriter
     {
-        public static void write(string path, EntryList entries) {
-            string serializedData = string.Empty;
-
-            XmlSerializer serializer = new XmlSerializer(entries.GetType());
-            using (StringWriter sw = new StringWriter())
-            {
-                serializer.Serialize(sw, entries);
-                serializedData = sw.ToString();
-            }
-
-            File.WriteAllText(path, serializedData);
+        public static void write(FileData data, string path)
+        {
+            write(data, path, null);
         }
 
-        public static void write(string path, CategoryList entries)
+        public static void write(FileData data, string path, string password)
         {
-            string serializedData = string.Empty;
-
-            XmlSerializer serializer = new XmlSerializer(entries.GetType());
-            using (StringWriter sw = new StringWriter())
+            IFormatter formatter = new BinaryFormatter(); 
+            XmlSerializer serializer = new XmlSerializer(data.GetType());
+            Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
+            StreamWriter streamWriter = new StreamWriter(stream);
+            string toWrite;
+            if(password == null)
             {
-                serializer.Serialize(sw, entries);
-                serializedData = sw.ToString();
+                toWrite = JsonConvert.SerializeObject(data);
+            } else
+            {
+                StringWriter stringWriter = new StringWriter();
+                serializer.Serialize(stringWriter, data);
+                string toEncrypt = stringWriter.ToString();
+                toWrite = Encrypter.encrypt(toEncrypt, password);
             }
-
-            File.WriteAllText(path, serializedData);
+            streamWriter.Write(toWrite);
+            streamWriter.Close();
+            stream.Close();
         }
     }
 }

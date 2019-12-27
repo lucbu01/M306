@@ -20,7 +20,7 @@
             <Button Name="btnFile" Width="20" Margin="0,0,5,0" Click="btnFile_Click">...</Button>
         </WrapPanel>
 
-        <Label Name="lblPassword" Grid.Row="2" Margin="5,0,5,0">Passwort</Label>
+        <Label Name="lblPassword" Grid.Row="2" Margin="5,0,5,0">Passwort (wenn vorhanden)</Label>
         <PasswordBox Name="pwbPassword" Grid.Row="3" Margin="5,0,5,5" Width="200" HorizontalAlignment="Left"/>
         <WrapPanel Grid.Row="4">
             <Button Name="btnOpen" Margin="10,5,5,5" Padding="5,2" Click="btnOpen_Click" IsEnabled="False">Öffnen</Button>
