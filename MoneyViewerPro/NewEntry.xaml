@@ -36,7 +36,7 @@
             <TextBox Name="txbPrice" Margin="5,0,5,5" Width="100" HorizontalAlignment="Left" TextChanged="txbPrice_TextChanged"/>
             <CheckBox Name="ckbIsFremdwaehrung" Checked="ckbIsFremdwaehrung_Checked" Unchecked="ckbIsFremdwaehrung_Unchecked">Fremdwährung</CheckBox>
         </WrapPanel>
-        <Label Grid.Row="9" Margin="5,0,5,0" IsEnabled="False">Währung</Label>
+        <Label Name="lblFremdwaehrung" Grid.Row="9" Margin="5,0,5,0" IsEnabled="False">Währung</Label>
         <TextBox Name="txbFremdwaehrung" Grid.Row="10" Margin="5,0,5,5" Width="50" HorizontalAlignment="Left" IsEnabled="False" TextChanged="txbFremdwaehrung_TextChanged"/>
         <WrapPanel Grid.Row="11">
             <Button Margin="10,5,5,5" Padding="5,2" Name="btnSave" IsDefault="True" IsEnabled="False" Click="btnSave_Click">Speichern</Button>

@@ -93,6 +93,7 @@ namespace MoneyViewerPro
 
         private void txbFremdwaehrung_TextChanged(object sender, TextChangedEventArgs e)
         {
+            MessageBox.Show(ExchangeRate.getExchangeRate("EUR", "CHF").Factor.ToString());
             changed(sender, e);
         }
 
@@ -113,12 +114,14 @@ namespace MoneyViewerPro
 
         private void ckbIsFremdwaehrung_Checked(object sender, RoutedEventArgs e)
         {
+            lblFremdwaehrung.IsEnabled = true;
             txbFremdwaehrung.IsEnabled = true;
             changed(sender, e);
         }
 
         private void ckbIsFremdwaehrung_Unchecked(object sender, RoutedEventArgs e)
         {
+            lblFremdwaehrung.IsEnabled = false;
             txbFremdwaehrung.IsEnabled = false;
             changed(sender, e);
         }
