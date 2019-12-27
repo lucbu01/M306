@@ -22,8 +22,6 @@ namespace MoneyViewerPro
 
         public static void write(FileData data, string path, string password)
         {
-            IFormatter formatter = new BinaryFormatter(); 
-            XmlSerializer serializer = new XmlSerializer(data.GetType());
             Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
             StreamWriter streamWriter = new StreamWriter(stream);
             string toWrite;
@@ -32,9 +30,7 @@ namespace MoneyViewerPro
                 toWrite = JsonConvert.SerializeObject(data);
             } else
             {
-                StringWriter stringWriter = new StringWriter();
-                serializer.Serialize(stringWriter, data);
-                string toEncrypt = stringWriter.ToString();
+                string toEncrypt = JsonConvert.SerializeObject(data);
                 toWrite = Encrypter.encrypt(toEncrypt, password);
             }
             streamWriter.Write(toWrite);

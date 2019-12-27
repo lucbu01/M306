@@ -64,6 +64,21 @@ namespace MoneyViewerPro
                     FileWriter.write(new FileData(entries, categories), txbFile.Text, pwbPassword.Password);
                 }
                 Close();
+            } else
+            {
+                FileData data = new FileData();
+                string password = null;
+                if (string.IsNullOrWhiteSpace(pwbPassword.Password))
+                {
+                    data = FileLoader.load(txbFile.Text);
+                }
+                else
+                {
+                    data = FileLoader.load(txbFile.Text, pwbPassword.Password);
+                    password = pwbPassword.Password;
+                }
+                new MainWindow(data.EntryList, data.CategoryList, txbFile.Text, password).Show();
+                Close();
             }
         }
 

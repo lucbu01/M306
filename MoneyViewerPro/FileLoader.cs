@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,26 +11,23 @@ namespace MoneyViewerPro
 {
     class FileLoader
     {
-        public static EntryList loadEntries(string path)
+        public static FileData load(string path)
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(EntryList));
-            string data = File.ReadAllText(path);
-            using (TextReader tr = new StringReader(data))
-            {
-                EntryList deserialized = (EntryList)deserializer.Deserialize(tr);
-                return deserialized;
-            }
+            return load(path, null);
         }
 
-        public static CategoryList loadCategory(string path)
+        public static FileData load(string path, string password)
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(CategoryList));
-            string data = File.ReadAllText(path);
-            using (TextReader tr = new StringReader(data))
+            Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None);
+            StreamReader streamReader = new StreamReader(stream);
+            string fileContent = streamReader.ReadToEnd();
+            streamReader.Close();
+            stream.Close();
+            if (password != null)
             {
-                CategoryList deserialized = (CategoryList)deserializer.Deserialize(tr);
-                return deserialized;
+               fileContent = Encrypter.decrypt(fileContent, password);
             }
+            return JsonConvert.DeserializeObject<FileData>(fileContent);
         }
     }
 }

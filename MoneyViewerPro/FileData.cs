@@ -11,10 +11,10 @@ namespace MoneyViewerPro
     public class FileData
     {
         [JsonProperty("entryList")]
-        EntryList EntryList { get; set; }
+        public EntryList EntryList { get; set; }
 
         [JsonProperty("categoryList")]
-        CategoryList CategoryList { get; set; }
+        public CategoryList CategoryList { get; set; }
 
         public FileData()
         {
