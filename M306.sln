@@ -7,16 +7,42 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyViewerPro", "MoneyView
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{556614FA-0E66-4C18-AAED-D4766729F252}"
 EndProject
+Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "Installer", "Installer\Installer.aiproj", "{F9EA357D-D6D4-47CC-864E-0DABA574266A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		All|Any CPU = All|Any CPU
+		All|x86 = All|x86
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.All|Any CPU.Build.0 = Release|Any CPU
+		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.All|x86.ActiveCfg = Debug|Any CPU
+		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.All|x86.Build.0 = Debug|Any CPU
 		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.Debug|x86.Build.0 = Debug|Any CPU
 		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.Release|x86.ActiveCfg = Release|Any CPU
+		{21E111C7-4A6D-4FF7-A6CE-C0067C3A0EE9}.Release|x86.Build.0 = Release|Any CPU
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.All|Any CPU.ActiveCfg = DefaultBuild
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.All|Any CPU.Build.0 = DefaultBuild
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.All|x86.ActiveCfg = DefaultBuild
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.All|x86.Build.0 = DefaultBuild
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.Debug|Any CPU.ActiveCfg = DefaultBuild
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.Debug|Any CPU.Build.0 = DefaultBuild
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.Debug|x86.ActiveCfg = DefaultBuild
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.Debug|x86.Build.0 = DefaultBuild
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.Release|Any CPU.ActiveCfg = DefaultBuild
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.Release|Any CPU.Build.0 = DefaultBuild
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.Release|x86.ActiveCfg = DefaultBuild
+		{F9EA357D-D6D4-47CC-864E-0DABA574266A}.Release|x86.Build.0 = DefaultBuild
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
