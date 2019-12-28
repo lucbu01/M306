@@ -27,7 +27,7 @@
       <Name>MoneyViewerPro</Name>
       <Project>{21e111c7-4a6d-4ff7-a6ce-c0067c3a0ee9}</Project>
       <Private>True</Private>
-      <OutputsToImport>PrimaryOutput</OutputsToImport>
+      <OutputsToImport>PrimaryOutput;References</OutputsToImport>
     </ProjectReference>
   </ItemGroup>
   <Target Name="Build">
