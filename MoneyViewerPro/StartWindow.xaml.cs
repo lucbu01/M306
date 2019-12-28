@@ -58,29 +58,53 @@ namespace MoneyViewerPro
         {
             if(option == StartWindowOptions.SAVE)
             {
-                if(string.IsNullOrWhiteSpace(pwbPassword.Password))
+                try
                 {
-                    FileWriter.write(new FileData(entries, categories), txbFile.Text);
-                } else
+                    if(string.IsNullOrWhiteSpace(pwbPassword.Password))
+                    {
+                        FileWriter.write(new FileData(entries, categories), txbFile.Text);
+                    } else
+                    {
+                        FileWriter.write(new FileData(entries, categories), txbFile.Text, pwbPassword.Password);
+                    }
+                    this.Successful = true;
+                    Close();
+                } catch
                 {
-                    FileWriter.write(new FileData(entries, categories), txbFile.Text, pwbPassword.Password);
+                    MessageBox.Show(this, "Es gab einen Fehler beim Speichern. Möglicherweise wird es von einem anderen Programm oder Prozess verwendet oder der Pfad ist ungültig. Versuchen Sie es nochmal oder wählen Sie einen anderen Pfad", "Fehler beim Speichern", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                Close();
             } else
             {
-                FileData data = new FileData();
-                Password = null;
-                if (string.IsNullOrWhiteSpace(pwbPassword.Password))
+                try
                 {
-                    data = FileLoader.load(txbFile.Text);
-                }
-                else
+                    FileData data = new FileData();
+                    Password = null;
+                    if (string.IsNullOrWhiteSpace(pwbPassword.Password))
+                    {
+                        data = FileLoader.load(txbFile.Text);
+                    }
+                    else
+                    {
+                        data = FileLoader.load(txbFile.Text, pwbPassword.Password);
+                        Password = pwbPassword.Password;
+                    }
+                    new MainWindow(data.EntryList, data.CategoryList, txbFile.Text, Password).Show();
+                    this.Successful = true;
+                    Close();
+                } catch (Exception ex)
                 {
-                    data = FileLoader.load(txbFile.Text, pwbPassword.Password);
-                    Password = pwbPassword.Password;
+                    if(ex.Message == "decrypt error")
+                    {
+                        MessageBox.Show(this, "Das eingegebene Passwort ist falsch oder es wurde beim Speichern keines verwendet.", "Fehler beim Lesen", MessageBoxButton.OK, MessageBoxImage.Error);
+                    } else if(ex.Message == "file format error")
+                    {
+                        MessageBox.Show(this, "Das File hat nicht den erwarteten Inhalt. Möglicherweise ist es mit einem Passwort verschlüsselt oder der Inhalt wurde verändert.", "Fehler beim Lesen", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show(this, "Es gab einen Fehler beim Lesen des angegebenen Files. Möglicherweise wird es von einem anderen Programm oder Prozess verwendet oder der Pfad ist ungültig. Überprüfen Sie den Pfad und schliessen Sie alle Programme, die das File verwenden.", "Fehler beim Lesen", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                new MainWindow(data.EntryList, data.CategoryList, txbFile.Text, Password).Show();
-                Close();
             }
         }
 

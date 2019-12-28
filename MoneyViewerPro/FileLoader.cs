@@ -25,9 +25,21 @@ namespace MoneyViewerPro
             stream.Close();
             if (password != null)
             {
-               fileContent = Encrypter.decrypt(fileContent, password);
+                try
+                {
+                    fileContent = Encrypter.decrypt(fileContent, password);
+                } catch
+                {
+                    throw new Exception("decrypt error");
+                }
             }
-            return JsonConvert.DeserializeObject<FileData>(fileContent);
+            try
+            {
+                return JsonConvert.DeserializeObject<FileData>(fileContent);
+            } catch
+            {
+                throw new Exception("file format error");
+            }
         }
     }
 }

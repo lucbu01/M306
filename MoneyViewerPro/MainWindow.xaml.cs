@@ -161,6 +161,13 @@ namespace MoneyViewerPro
         {
             StartWindow startWindow = new StartWindow(entries, categories, StartWindow.StartWindowOptions.SAVE);
             startWindow.ShowDialog();
+            if(startWindow.Successful)
+            {
+                this.filename = startWindow.Path;
+                this.password = startWindow.Password;
+                this.mniSave.IsEnabled = true;
+                changes = false;
+            }
             return startWindow.Successful;
         }
 
@@ -169,6 +176,7 @@ namespace MoneyViewerPro
             try
             {
                 FileWriter.write(new FileData(entries, categories), filename, password);
+                changes = false;
                 return true;
             } catch
             {
