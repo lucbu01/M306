@@ -30,6 +30,8 @@ namespace MoneyViewerPro
         private CategoryList categories;
         private StartWindowOptions option = StartWindowOptions.OPEN;
         public bool Successful { get; set; } = false;
+        public string Path { get; set; } = null;
+        public string Password { get; set; } = null;
 
         public StartWindow()
         {
@@ -46,7 +48,7 @@ namespace MoneyViewerPro
             {
                 this.btnNew.Content = "Abbrechen";
                 this.btnOpen.Content = "Speichern";
-                this.lblPassword.Content += " (optional)";
+                this.lblPassword.Content = "Passwort (optional)";
                 this.pwbPassword.IsEnabled = true;
                 this.Title = "Speichern - Money Viewer Pro";
             }
@@ -67,7 +69,7 @@ namespace MoneyViewerPro
             } else
             {
                 FileData data = new FileData();
-                string password = null;
+                Password = null;
                 if (string.IsNullOrWhiteSpace(pwbPassword.Password))
                 {
                     data = FileLoader.load(txbFile.Text);
@@ -75,9 +77,9 @@ namespace MoneyViewerPro
                 else
                 {
                     data = FileLoader.load(txbFile.Text, pwbPassword.Password);
-                    password = pwbPassword.Password;
+                    Password = pwbPassword.Password;
                 }
-                new MainWindow(data.EntryList, data.CategoryList, txbFile.Text, password).Show();
+                new MainWindow(data.EntryList, data.CategoryList, txbFile.Text, Password).Show();
                 Close();
             }
         }

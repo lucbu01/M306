@@ -30,12 +30,17 @@ namespace MoneyViewerPro
         private CloseAction closeAction = CloseAction.STANDARD;
         private string filename = "";
         private string password = "";
+        private string all = "--Alle--";
+        private Category allCategories = new Category("--Alle--", "");
 
         public MainWindow()
         {
             InitializeComponent();
             this.entries = new EntryList();
             this.categories = new CategoryList();
+            this.btnNewEntry.IsEnabled = false;
+            fillCategoriesBox();
+            fillYearBox();
         }
 
         public MainWindow(EntryList entries, CategoryList categories)
@@ -43,7 +48,9 @@ namespace MoneyViewerPro
             InitializeComponent();
             this.entries = entries;
             this.categories = categories;
-            this.cmbCategory.ItemsSource = categories.categories;
+            fillCategoriesBox();
+            fillYearBox();
+            this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
         }
 
         public MainWindow(EntryList entries, CategoryList categories, string filename, string password)
@@ -53,7 +60,10 @@ namespace MoneyViewerPro
             this.categories = categories;
             this.filename = filename;
             this.password = password;
-            this.mniSave.IsEnabled = true;
+            this.mniSave.IsEnabled = !string.IsNullOrWhiteSpace(filename);
+            fillCategoriesBox();
+            fillYearBox();
+            this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
         }
 
        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -75,12 +85,15 @@ namespace MoneyViewerPro
         {
             NewEntry entryWindow = new NewEntry(this.entries, this.categories);
             entryWindow.ShowDialog();
+            fillYearBox();
         }
 
         private void btnNewCategory_Click(object sender, RoutedEventArgs e)
         {
             NewCategory categoryWindow = new NewCategory(this.categories);
             categoryWindow.ShowDialog();
+            fillCategoriesBox();
+            this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
         }
 
         private void newWindow(object sender, RoutedEventArgs e)
@@ -123,7 +136,15 @@ namespace MoneyViewerPro
 
         private bool save()
         {
-            return false;
+            try
+            {
+                FileWriter.write(new FileData(entries, categories), filename, password);
+                return true;
+            } catch
+            {
+                MessageBox.Show(this, "Es gab einen Fehler beim Speichern. Möglicherweise wird es von einem anderen Programm oder Prozess verwendet. Versuchen Sie es nochmal oder wählen Sie \"Speichern unter\" um das File an einem anderen Ort zu speichern", "Fehler beim Speichern", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
         }
 
         private void mniSave_Click(object sender, RoutedEventArgs e)
@@ -134,6 +155,29 @@ namespace MoneyViewerPro
         private void mniSaveOn_Click(object sender, RoutedEventArgs e)
         {
             saveOn();
+        }
+
+        private void fillCategoriesBox()
+        {
+            List<Category> items = new List<Category>();
+            items.Add(allCategories);
+            items.AddRange(this.categories.categories);
+            cmbCategory.ItemsSource = items;
+            cmbCategory.SelectedItem = allCategories;
+        }
+
+        private void fillYearBox()
+        {
+            List<object> items = new List<object>();
+            items.Add(all);
+            items.AddRange(entries.years());
+            cmbYear.ItemsSource = items;
+            cmbYear.SelectedItem = all;
+        }
+
+        private void fillMonthBox()
+        {
+            
         }
     }
 }

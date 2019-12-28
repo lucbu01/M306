@@ -25,6 +25,7 @@ namespace MoneyViewerPro
 
         public void addEntry(Entry entry) {
             entries.Add(entry);
+            entries.Sort((x, y) => y.dateTime.CompareTo(x.dateTime));
         }
 
         public List<Entry> filter(DateTime startDate, DateTime endDate) {
@@ -59,6 +60,19 @@ namespace MoneyViewerPro
                 }
             }
             return result;
+        }
+
+        public List<object> years()
+        {
+            List<object> years = new List<object>();
+            foreach(Entry entry in entries)
+            {
+                if(years.IndexOf(entry.dateTime.Year) == -1)
+                {
+                    years.Add(entry.dateTime.Year);
+                }
+            }
+            return years;
         }
     }
 }

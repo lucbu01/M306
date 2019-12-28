@@ -24,5 +24,10 @@ namespace MoneyViewerPro
         {
 
         }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

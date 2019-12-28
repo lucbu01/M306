@@ -21,6 +21,7 @@ namespace MoneyViewerPro
     {
         CategoryList categories;
         EntryList entries;
+        private double value;
         public NewEntry(EntryList entries, CategoryList categories)
         {
             InitializeComponent();
@@ -46,14 +47,15 @@ namespace MoneyViewerPro
             {
                 MessageBox.Show(this, "Bitte geben Sie eine Fremdwährung an oder entfernen Sie den Haken bei Fremdwährung", "Hinzufügen nicht möglich", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            entries.addEntry(new Entry(cmbCategory.SelectedItem as Category, txbDescription.Text, Convert.ToDouble(txbPrice.Text), datName.SelectedDate.Value));
+            entries.addEntry(new Entry(cmbCategory.SelectedItem as Category, txbDescription.Text, radEinnahmen.IsChecked.Value ? value : -1 * value, datName.SelectedDate.Value));
+            Close();
         }
 
         private void changed(object sender, EventArgs e)
         {
             bool enabled = true;
             enabled = enabled && (radAusgaben.IsChecked.Value || radEinnahmen.IsChecked.Value);
-            enabled = enabled && (ckbIsFremdwaehrung.IsChecked.Value ? !string.IsNullOrWhiteSpace(txbFremdwaehrung.Text) : true);
+            enabled = enabled && value > -1;
             enabled = enabled && !string.IsNullOrWhiteSpace(txbDescription.Text);
             enabled = enabled && datName.SelectedDate.HasValue;
             enabled = enabled && !string.IsNullOrWhiteSpace(txbPrice.Text);
@@ -78,11 +80,17 @@ namespace MoneyViewerPro
             }
             txbPrice.Text = output;
             txbPrice.Select(txbPrice.Text.Length, 0);
+            calcValue();
             changed(sender, e);
         }
 
         private void datName_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            if(this.datName.SelectedDate.HasValue && this.datName.SelectedDate.Value.Date > DateTime.Now.Date)
+            {
+                this.datName.SelectedDate = null;
+            }
+            calcValue();
             changed(sender, e);
         }
 
@@ -93,8 +101,39 @@ namespace MoneyViewerPro
 
         private void txbFremdwaehrung_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //MessageBox.Show(ExchangeRate.getExchangeRate("EUR", "CHF").Factor.ToString());
+            calcValue();
             changed(sender, e);
+        }
+
+        private void calcValue()
+        {
+            value = string.IsNullOrWhiteSpace(txbPrice.Text) ? -1 : Convert.ToDouble(txbPrice.Text);
+            if (value > -1 && ckbIsFremdwaehrung.IsChecked.HasValue && ckbIsFremdwaehrung.IsChecked.Value)
+            {
+                try
+                {
+                    if(!string.IsNullOrWhiteSpace(txbFremdwaehrung.Text) && txbFremdwaehrung.Text.Trim().Length == 3 && datName.SelectedDate.HasValue)
+                    {
+                        ExchangeRate rate = ExchangeRate.getExchangeRate(txbFremdwaehrung.Text.Trim().ToUpper(), "CHF", datName.SelectedDate.Value);
+                        value = rate.calculate(value); 
+                        lblFremdwaehrungValue.Content = "CHF " + Math.Round(value, 2) + " (Wechselkurs " + txbFremdwaehrung.Text.Trim().ToUpper() + " zu CHF am " + datName.SelectedDate.Value.ToString("dd.MM.yyyy") + ": " + rate.Factor + ")";
+                    } else
+                    {
+                        lblFremdwaehrungValue.Content = "";
+                        value = -1;
+                    }
+                }
+                catch
+                {
+                    lblFremdwaehrungValue.Content = "Wechselkurs konnte nicht abgerufen werden";
+                    value = -1;
+                }
+            } else
+            {
+                lblFremdwaehrungValue.Content = "";
+                value = -1;
+            }
+            value = Math.Round(value, 2);
         }
 
         private void radEinnahmen_Checked(object sender, RoutedEventArgs e)
@@ -116,6 +155,7 @@ namespace MoneyViewerPro
         {
             lblFremdwaehrung.IsEnabled = true;
             txbFremdwaehrung.IsEnabled = true;
+            calcValue();
             changed(sender, e);
         }
 
@@ -123,6 +163,7 @@ namespace MoneyViewerPro
         {
             lblFremdwaehrung.IsEnabled = false;
             txbFremdwaehrung.IsEnabled = false;
+            calcValue();
             changed(sender, e);
         }
     }
