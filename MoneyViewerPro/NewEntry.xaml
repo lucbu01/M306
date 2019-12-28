@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoneyViewerPro"
         mc:Ignorable="d"
-        Title="NewEntry" Height="440" Width="520" ResizeMode="NoResize">
+        Title="NewEntry" Height="440" Width="520" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

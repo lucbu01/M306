@@ -22,8 +22,9 @@ namespace MoneyViewerPro
         CategoryList categories;
         EntryList entries;
         private double value;
-        public NewEntry(EntryList entries, CategoryList categories)
+        public NewEntry(Window owner, EntryList entries, CategoryList categories)
         {
+            this.Owner = owner;
             InitializeComponent();
             this.categories = categories;
             this.entries = entries;

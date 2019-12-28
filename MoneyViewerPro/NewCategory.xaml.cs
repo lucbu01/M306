@@ -20,8 +20,9 @@ namespace MoneyViewerPro
     public partial class NewCategory : Window
     {
         private CategoryList categories;
-        public NewCategory(CategoryList categories)
+        public NewCategory(Window owner, CategoryList categories)
         {
+            this.Owner = owner;
             InitializeComponent();
             this.categories = categories;
         }

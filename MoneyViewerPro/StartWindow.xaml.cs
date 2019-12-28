@@ -35,11 +35,14 @@ namespace MoneyViewerPro
 
         public StartWindow()
         {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
-        public StartWindow(EntryList entries, CategoryList categories, StartWindowOptions options)
+        public StartWindow(Window owner, EntryList entries, CategoryList categories, StartWindowOptions options)
         {
+            this.Owner = owner;
+            WindowStartupLocation = WindowStartupLocation.CenterOwner;
             InitializeComponent();
             this.entries = entries;
             this.categories = categories;

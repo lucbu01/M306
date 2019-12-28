@@ -108,7 +108,7 @@ namespace MoneyViewerPro
 
         private void btnNewEntry_Click(object sender, RoutedEventArgs e)
         {
-            NewEntry entryWindow = new NewEntry(this.entries, this.categories);
+            NewEntry entryWindow = new NewEntry(this, this.entries, this.categories);
             entryWindow.ShowDialog();
             fillYearBox();
             changes = true;
@@ -116,7 +116,7 @@ namespace MoneyViewerPro
 
         private void btnNewCategory_Click(object sender, RoutedEventArgs e)
         {
-            NewCategory categoryWindow = new NewCategory(this.categories);
+            NewCategory categoryWindow = new NewCategory(this, this.categories);
             categoryWindow.ShowDialog();
             fillCategoriesBox();
             this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
@@ -159,7 +159,7 @@ namespace MoneyViewerPro
 
         private bool saveOn()
         {
-            StartWindow startWindow = new StartWindow(entries, categories, StartWindow.StartWindowOptions.SAVE);
+            StartWindow startWindow = new StartWindow(this, entries, categories, StartWindow.StartWindowOptions.SAVE);
             startWindow.ShowDialog();
             if(startWindow.Successful)
             {
