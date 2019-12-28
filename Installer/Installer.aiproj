@@ -22,6 +22,14 @@
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyViewerPro\MoneyViewerPro.csproj">
+      <Name>MoneyViewerPro</Name>
+      <Project>{21e111c7-4a6d-4ff7-a6ce-c0067c3a0ee9}</Project>
+      <Private>True</Private>
+      <OutputsToImport>PrimaryOutput</OutputsToImport>
+    </ProjectReference>
+  </ItemGroup>
   <Target Name="Build">
     <Error Text="This project requires Advanced Installer tool. Please download it from https://www.advancedinstaller.com/download.html" />
   </Target>
