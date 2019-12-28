@@ -32,6 +32,8 @@ namespace MoneyViewerPro
         private string password = "";
         private string all = "--Alle--";
         private Category allCategories = new Category("--Alle--", "");
+        private Dictionary<int, string> months = new Dictionary<int, string>();
+        private bool changes = false;
 
         public MainWindow()
         {
@@ -39,8 +41,10 @@ namespace MoneyViewerPro
             this.entries = new EntryList();
             this.categories = new CategoryList();
             this.btnNewEntry.IsEnabled = false;
+            fillMonths();
             fillCategoriesBox();
             fillYearBox();
+            fillMonthBox();
         }
 
         public MainWindow(EntryList entries, CategoryList categories)
@@ -48,8 +52,10 @@ namespace MoneyViewerPro
             InitializeComponent();
             this.entries = entries;
             this.categories = categories;
+            fillMonths();
             fillCategoriesBox();
             fillYearBox();
+            fillMonthBox();
             this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
         }
 
@@ -61,9 +67,28 @@ namespace MoneyViewerPro
             this.filename = filename;
             this.password = password;
             this.mniSave.IsEnabled = !string.IsNullOrWhiteSpace(filename);
+            fillMonths();
             fillCategoriesBox();
             fillYearBox();
+            fillMonthBox();
             this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
+        }
+
+        private void fillMonths()
+        {
+            months = new Dictionary<int, string>();
+            months.Add(1, "Januar");
+            months.Add(2, "Februar");
+            months.Add(3, "März");
+            months.Add(4, "April");
+            months.Add(5, "Mai");
+            months.Add(6, "Juni");
+            months.Add(7, "Juli");
+            months.Add(8, "August");
+            months.Add(9, "September");
+            months.Add(10, "Oktober");
+            months.Add(11, "Noveber");
+            months.Add(12, "Dezember");
         }
 
        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -86,6 +111,7 @@ namespace MoneyViewerPro
             NewEntry entryWindow = new NewEntry(this.entries, this.categories);
             entryWindow.ShowDialog();
             fillYearBox();
+            changes = true;
         }
 
         private void btnNewCategory_Click(object sender, RoutedEventArgs e)
@@ -94,6 +120,7 @@ namespace MoneyViewerPro
             categoryWindow.ShowDialog();
             fillCategoriesBox();
             this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
+            changes = true;
         }
 
         private void newWindow(object sender, RoutedEventArgs e)
@@ -103,20 +130,23 @@ namespace MoneyViewerPro
 
         private bool trySave()
         {
-            MessageBoxResult result = MessageBox.Show(this, "Möchten Sie Ihre Änderungen speichern?", "Speichern?", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if(changes)
             {
-                if(string.IsNullOrEmpty(this.filename))
+                MessageBoxResult result = MessageBox.Show(this, "Möchten Sie Ihre Änderungen speichern?", "Speichern?", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
                 {
-                    return saveOn();
-                } else
-                {
-                    return save();
+                    if(string.IsNullOrEmpty(this.filename))
+                    {
+                        return saveOn();
+                    } else
+                    {
+                        return save();
+                    }
                 }
-            }
-            else if (result == MessageBoxResult.Cancel)
-            {
-                return false;
+                else if (result == MessageBoxResult.Cancel)
+                {
+                    return false;
+                }
             }
             return true;
         }
@@ -168,16 +198,39 @@ namespace MoneyViewerPro
 
         private void fillYearBox()
         {
-            List<object> items = new List<object>();
+            List<string> items = new List<string>();
             items.Add(all);
-            items.AddRange(entries.years());
+            foreach(int year in entries.years())
+            {
+                items.Add(year.ToString());
+            }
             cmbYear.ItemsSource = items;
             cmbYear.SelectedItem = all;
         }
 
         private void fillMonthBox()
         {
-            
+            string year = cmbYear.SelectedItem as string;
+            List<string> items = new List<string>();
+            items.Add(all);
+            if(year != null && year != all)
+            {
+                foreach(int month in entries.months(Convert.ToInt32(year)))
+                {
+                    items.Add(this.months[month]);
+                }
+                cmbMonth.IsEnabled = true;
+            } else
+            {
+                cmbMonth.IsEnabled = false;
+            }
+            cmbMonth.ItemsSource = items;
+            cmbMonth.SelectedItem = all;
+        }
+
+        private void cmbYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            fillMonthBox();
         }
     }
 }

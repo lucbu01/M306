@@ -28,7 +28,7 @@ namespace MoneyViewerPro
             entries.Sort((x, y) => y.dateTime.CompareTo(x.dateTime));
         }
 
-        public List<Entry> filter(DateTime startDate, DateTime endDate) {
+        public EntryList filter(DateTime startDate, DateTime endDate) {
             List<Entry> result = new List<Entry>();
             foreach (Entry entry in entries)
             {
@@ -37,9 +37,9 @@ namespace MoneyViewerPro
                     result.Add(entry);
                 }
             }
-            return result;
+            return new EntryList(result);
         }
-        public List<Entry> filter(Category category)
+        public EntryList filter(Category category)
         {
             List<Entry> result = new List<Entry>();
             foreach (Entry entry in entries) {
@@ -47,9 +47,9 @@ namespace MoneyViewerPro
                     result.Add(entry);
                 }
             }
-            return result;
+            return new EntryList(result);
         }
-        public List<Entry> filter(Category category, DateTime startDate, DateTime endDate)
+        public EntryList filter(Category category, DateTime startDate, DateTime endDate)
         {
             List<Entry> result = new List<Entry>();
             foreach (Entry entry in entries)
@@ -59,12 +59,12 @@ namespace MoneyViewerPro
                     result.Add(entry);
                 }
             }
-            return result;
+            return new EntryList(result);
         }
 
-        public List<object> years()
+        public List<int> years()
         {
-            List<object> years = new List<object>();
+            List<int> years = new List<int>();
             foreach(Entry entry in entries)
             {
                 if(years.IndexOf(entry.dateTime.Year) == -1)
@@ -73,6 +73,19 @@ namespace MoneyViewerPro
                 }
             }
             return years;
+        }
+
+        public List<int> months(int year)
+        {
+            List<int> months = new List<int>();
+            foreach (Entry entry in entries)
+            {
+                if (entry.dateTime.Year == year && months.IndexOf(entry.dateTime.Month) == -1)
+                {
+                    months.Add(entry.dateTime.Month);
+                }
+            }
+            return months;
         }
     }
 }
