@@ -48,7 +48,8 @@ namespace MoneyViewerPro
             {
                 MessageBox.Show(this, "Bitte geben Sie eine Fremdwährung an oder entfernen Sie den Haken bei Fremdwährung", "Hinzufügen nicht möglich", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            entries.addEntry(new Entry(cmbCategory.SelectedItem as Category, txbDescription.Text, radEinnahmen.IsChecked.Value ? value : -1 * value, datName.SelectedDate.Value));
+            bool isIncome = radEinnahmen.IsChecked != null ? true : false;
+            entries.addEntry(new Entry(isIncome, cmbCategory.SelectedItem as Category, txbDescription.Text, radEinnahmen.IsChecked.Value ? value : -1 * value, datName.SelectedDate.Value));
             Close();
         }
 

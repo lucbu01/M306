@@ -10,7 +10,8 @@ namespace MoneyViewerPro
     [Serializable]
     public class Entry
     {
-
+        [JsonProperty("isIncome")]
+        public bool isIncome { get; set; }
         [JsonProperty("category")]
         public Category category { get; set; } = new Category();
         [JsonProperty("description")]
@@ -20,7 +21,8 @@ namespace MoneyViewerPro
         [JsonProperty("dateTime")]
         public DateTime dateTime { get; set; } = DateTime.Now;
 
-        public Entry(Category category, string description, double value, DateTime dateTime) {
+        public Entry(bool isIncoem, Category category, string description, double value, DateTime dateTime) {
+            this.isIncome = isIncome;
             this.category = category;
             this.description = description;
             this.value = value;
