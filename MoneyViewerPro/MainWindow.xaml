@@ -40,14 +40,15 @@
             <Label Margin="5,5,5,0" Grid.Column="0" Grid.Row="0">Jahr</Label>
             <ComboBox Name="cmbYear" Margin="5,0,5,5" Width="140" Grid.Column="0" Grid.Row="1" SelectionChanged="cmbYear_SelectionChanged"></ComboBox>
             <Label Margin="5,5,5,0" Grid.Column="1" Grid.Row="0">Monat</Label>
-            <ComboBox Name="cmbMonth" Margin="5,0,5,5" Width="140" Grid.Column="1" Grid.Row="1" IsEnabled="False"></ComboBox>
+            <ComboBox Name="cmbMonth" Margin="5,0,5,5" Width="140" Grid.Column="1" Grid.Row="1" IsEnabled="False" SelectionChanged="CmbMonth_SelectionChanged"></ComboBox>
             <Label Margin="5,5,5,0" Grid.Column="2" Grid.Row="0">Kategorie</Label>
-            <ComboBox Name="cmbCategory" Margin="5,0,5,5" Width="140" Grid.Column="2" Grid.Row="1"></ComboBox>
+            <ComboBox Name="cmbCategory" Margin="5,0,5,5" Width="140" Grid.Column="2" Grid.Row="1" SelectionChanged="CmbCategory_SelectionChanged"></ComboBox>
             <Button Name="btnNewEntry" Margin="5" VerticalAlignment="Center" Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Click="btnNewEntry_Click">Neuer Eintrag</Button>
             <Button Name="btnNewCategory" Margin="5" VerticalAlignment="Center" Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" Click="btnNewCategory_Click">Neue Kategorie</Button>
         </Grid>
         <Grid Grid.Row="2">
-            
+            <DataGrid Name="dgBudget" IsReadOnly="True">
+            </DataGrid>
         </Grid>
         <StatusBar Grid.Row="3" />
     </Grid>

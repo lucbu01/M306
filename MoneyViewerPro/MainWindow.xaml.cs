@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace MoneyViewerPro
 {
@@ -34,6 +35,10 @@ namespace MoneyViewerPro
         private Category allCategories = new Category("--Alle--", "");
         private Dictionary<int, string> months = new Dictionary<int, string>();
         private bool changes = false;
+        //need for calculation
+        private string year = null;
+        private string month = null;
+        private string category = null;
 
         public MainWindow()
         {
@@ -57,6 +62,7 @@ namespace MoneyViewerPro
             fillYearBox();
             fillMonthBox();
             this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
+            updateData();
         }
 
         public MainWindow(EntryList entries, CategoryList categories, string filename, string password)
@@ -72,6 +78,7 @@ namespace MoneyViewerPro
             fillYearBox();
             fillMonthBox();
             this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
+            updateData();
         }
 
         private void fillMonths()
@@ -87,7 +94,7 @@ namespace MoneyViewerPro
             months.Add(8, "August");
             months.Add(9, "September");
             months.Add(10, "Oktober");
-            months.Add(11, "Noveber");
+            months.Add(11, "November");
             months.Add(12, "Dezember");
         }
 
@@ -112,6 +119,7 @@ namespace MoneyViewerPro
             entryWindow.ShowDialog();
             fillYearBox();
             changes = true;
+            updateData();
         }
 
         private void btnNewCategory_Click(object sender, RoutedEventArgs e)
@@ -121,6 +129,7 @@ namespace MoneyViewerPro
             fillCategoriesBox();
             this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
             changes = true;
+            updateData();
         }
 
         private void newWindow(object sender, RoutedEventArgs e)
@@ -239,6 +248,75 @@ namespace MoneyViewerPro
         private void cmbYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             fillMonthBox();
+            updateData();
         }
+
+        private void CmbMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            updateData();
+        }
+        private void CmbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            updateData();
+        }
+
+        private void updateData() {
+            getCmbValues();
+            initalizeDatagrid();
+        }
+
+        private void initalizeDatagrid() {
+            List<Budget> budget = new List<Budget>();
+            budget.Add(new Budget() { Datum = "gesamt", Einnahmen = calculate(true), Ausgaben = calculate(false) }) ;
+            dgBudget.ItemsSource = budget;
+        }
+
+        private double calculate(bool isIncome)
+        {
+            double sum = 0.0;
+            List<Entry> entriesList = entries.entries;
+            if (isIncome) {
+                entriesList = entriesList.Where(x => x.value > 0).ToList();
+            }
+            else {
+                entriesList = entriesList.Where(x => x.value < 0).ToList();
+            }
+            if (year != null) {
+                entriesList = entriesList.Where(x => x.dateTime.Year == Int32.Parse(year)).ToList();
+            } 
+            if (month != null) {
+                entriesList = entriesList.Where(x => x.dateTime.Month == DateTime.ParseExact(month, "MMMM", CultureInfo.CurrentCulture).Month).ToList();
+            }
+            if (category != null) {
+                entriesList = entriesList.Where(x => x.category.name == category).ToList();
+            }
+            entriesList.ForEach(x => sum += x.value);
+            return Math.Abs(sum);
+        }
+
+        private void getCmbValues() {
+            year = cmbYear.Text;
+            month = cmbMonth.Text;
+            category = cmbCategory.Text;
+
+            if (year == all) {
+                year = null;
+            }
+            if (month == all) {
+                month = null;
+            }
+            if (category == all) {
+                category = null;
+            }
+        }
+    }
+
+    public class Budget
+    {
+        public string Datum { get; set; }
+
+        public double Einnahmen { get; set; }
+
+        public double Ausgaben { get; set; }
     }
 }
