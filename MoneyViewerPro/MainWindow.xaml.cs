@@ -295,9 +295,9 @@ namespace MoneyViewerPro
         }
 
         private void getCmbValues() {
-            year = cmbYear.Text;
-            month = cmbMonth.Text;
-            category = cmbCategory.Text;
+            year = cmbYear.SelectedItem == null ? null : cmbYear.SelectedItem.ToString();
+            month = cmbMonth.SelectedItem == null ? null : cmbMonth.SelectedItem.ToString();
+            category = cmbCategory.SelectedItem == null ? null : cmbCategory.SelectedItem.ToString();
 
             if (year == all) {
                 year = null;
