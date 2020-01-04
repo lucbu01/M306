@@ -65,7 +65,7 @@
                     <DataGridTextColumn Header="Typ" Binding="{Binding type}"/>
                     <DataGridTextColumn Header="Datum" Binding="{Binding dateTime, StringFormat={}{0:dd.MM.yyyy}}"/>
                     <DataGridTextColumn Header="Kategorie" Binding="{Binding category}"/>
-                    <DataGridTextColumn Header="Wert" Binding="{Binding value, StringFormat={}{0:N2}}"/>
+                    <DataGridTextColumn Header="Wert" Binding="{Binding value, StringFormat={}CHF {0:N2}}"/>
                     <DataGridTextColumn Header="Beschreibung" Binding="{Binding description}"/>
                 </DataGrid.Columns>
             </DataGrid>
