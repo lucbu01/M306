@@ -63,12 +63,15 @@ namespace MoneyViewerPro
             {
                 try
                 {
+                    Path = txbFile.Text;
                     if(string.IsNullOrWhiteSpace(pwbPassword.Password))
                     {
                         FileWriter.write(new FileData(entries, categories), txbFile.Text);
+                        Password = null;
                     } else
                     {
                         FileWriter.write(new FileData(entries, categories), txbFile.Text, pwbPassword.Password);
+                        Password = pwbPassword.Password;
                     }
                     this.Successful = true;
                     Close();
