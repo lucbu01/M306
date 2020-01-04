@@ -264,13 +264,36 @@ namespace MoneyViewerPro
 
         private void updateData() {
             getCmbValues();
+            setBudget();
             initalizeDatagrid();
         }
 
+        private void setBudget()
+        {
+            txtIncome.Text = calculate(true).ToString();
+            txtExpense.Text = calculate(false).ToString();
+        }
+
         private void initalizeDatagrid() {
-            List<Budget> budget = new List<Budget>();
-            budget.Add(new Budget() { Datum = "gesamt", Einnahmen = calculate(true), Ausgaben = calculate(false) }) ;
-            dgBudget.ItemsSource = budget;
+            dgBudget.ItemsSource = filterEntryList(entries.entries); ;
+        }
+
+        private List<Entry> filterEntryList(List<Entry> entries)
+        {
+            List<Entry> entriesList = entries;
+            if (year != null)
+            {
+                entriesList = entriesList.Where(x => x.dateTime.Year == Int32.Parse(year)).ToList();
+            }
+            if (month != null)
+            {
+                entriesList = entriesList.Where(x => x.dateTime.Month == DateTime.ParseExact(month, "MMMM", CultureInfo.CurrentCulture).Month).ToList();
+            }
+            if (category != null)
+            {
+                entriesList = entriesList.Where(x => x.category.name == category).ToList();
+            }
+            return entriesList;
         }
 
         private double calculate(bool isIncome)
@@ -283,15 +306,7 @@ namespace MoneyViewerPro
             else {
                 entriesList = entriesList.Where(x => x.value < 0).ToList();
             }
-            if (year != null) {
-                entriesList = entriesList.Where(x => x.dateTime.Year == Int32.Parse(year)).ToList();
-            } 
-            if (month != null) {
-                entriesList = entriesList.Where(x => x.dateTime.Month == DateTime.ParseExact(month, "MMMM", CultureInfo.CurrentCulture).Month).ToList();
-            }
-            if (category != null) {
-                entriesList = entriesList.Where(x => x.category.name == category).ToList();
-            }
+            entriesList = filterEntryList(entriesList);
             entriesList.ForEach(x => sum += x.value);
             return Math.Abs(sum);
         }

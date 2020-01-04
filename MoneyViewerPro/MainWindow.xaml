@@ -8,7 +8,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="19"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="19"/>
         </Grid.RowDefinitions>
@@ -47,9 +48,22 @@
             <Button Name="btnNewCategory" Margin="5" VerticalAlignment="Center" Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" Click="btnNewCategory_Click">Neue Kategorie</Button>
         </Grid>
         <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="125"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="125"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0">Einnahmen</Label>
+            <TextBox Name="txtIncome" Grid.Column="1" Margin="5,2,5,7" IsReadOnly="True"></TextBox>
+            <Label Grid.Column="2">Ausgaben</Label>
+            <TextBox Name="txtExpense" Grid.Column="3" Margin="5,2,5,7" IsReadOnly="True"></TextBox>
+        </Grid>
+        <Grid Grid.Row="3">
             <DataGrid Name="dgBudget" IsReadOnly="True">
             </DataGrid>
         </Grid>
-        <StatusBar Grid.Row="3" />
+        <StatusBar Grid.Row="4" />
     </Grid>
 </Window>
