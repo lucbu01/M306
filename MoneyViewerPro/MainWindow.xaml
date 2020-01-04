@@ -9,9 +9,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="19"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="19"/>
         </Grid.RowDefinitions>
         <Menu HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Grid.Row="0">
             <MenuItem Header="_Datei">
@@ -49,21 +48,27 @@
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="75"/>
-                <ColumnDefinition Width="125"/>
-                <ColumnDefinition Width="75"/>
-                <ColumnDefinition Width="125"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0">Einnahmen</Label>
-            <TextBox Name="txtIncome" Grid.Column="1" Margin="5,2,5,7" IsReadOnly="True"></TextBox>
-            <Label Grid.Column="2">Ausgaben</Label>
-            <TextBox Name="txtExpense" Grid.Column="3" Margin="5,2,5,7" IsReadOnly="True"></TextBox>
+            <Label Grid.Column="0" Foreground="#FF068B00" FontSize="20">Einnahmen:</Label>
+            <Label Name="lblIncomeValue" Grid.Column="1" Margin="5,2,5,7" Foreground="#FF068B00" FontSize="20" FontWeight="Bold"></Label>
+            <Label Grid.Column="2" Foreground="Red" FontSize="20">Ausgaben:</Label>
+            <Label Name="lblExpenseValue" Grid.Column="3" Margin="5,2,5,7" Foreground="Red" FontSize="20" FontWeight="Bold"></Label>
         </Grid>
         <Grid Grid.Row="3">
-            <DataGrid Name="dgBudget" IsReadOnly="True">
+            <DataGrid Name="dgBudget" IsReadOnly="True" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Typ" Binding="{Binding type}"/>
+                    <DataGridTextColumn Header="Datum" Binding="{Binding dateTime, StringFormat={}{0:dd.MM.yyyy}}"/>
+                    <DataGridTextColumn Header="Kategorie" Binding="{Binding category}"/>
+                    <DataGridTextColumn Header="Wert" Binding="{Binding value, StringFormat={}{0:N2}}"/>
+                    <DataGridTextColumn Header="Beschreibung" Binding="{Binding description}"/>
+                </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <StatusBar Grid.Row="4" />
     </Grid>
 </Window>

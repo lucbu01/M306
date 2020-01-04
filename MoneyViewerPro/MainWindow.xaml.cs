@@ -270,8 +270,8 @@ namespace MoneyViewerPro
 
         private void setBudget()
         {
-            txtIncome.Text = calculate(true).ToString();
-            txtExpense.Text = calculate(false).ToString();
+            lblIncomeValue.Content = string.Format("CHF {0:N2}", calculate(true));
+            lblExpenseValue.Content = string.Format("CHF {0:N2}", calculate(false));
         }
 
         private void initalizeDatagrid() {

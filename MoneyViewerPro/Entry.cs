@@ -18,6 +18,7 @@ namespace MoneyViewerPro
         public double value { get; set; } = 0.00;
         [JsonProperty("dateTime")]
         public DateTime dateTime { get; set; } = DateTime.Now;
+        public string type { get { return value >= 0 ? "Einnahmen" : "Ausgaben"; } }
 
         public Entry(Category category, string description, double value, DateTime dateTime) {
             this.category = category;
