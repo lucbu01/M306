@@ -29,7 +29,6 @@ namespace MoneyViewerPro
             this.categories = categories;
             this.entries = entries;
             this.cmbCategory.ItemsSource = categories.categories;
-            txbPrice.Text = Convert.ToString(1.51);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -132,7 +131,6 @@ namespace MoneyViewerPro
             } else
             {
                 lblFremdwaehrungValue.Content = "";
-                value = -1;
             }
             value = Math.Round(value, 2);
         }

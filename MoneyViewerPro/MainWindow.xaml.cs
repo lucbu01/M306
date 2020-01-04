@@ -78,6 +78,7 @@ namespace MoneyViewerPro
             fillYearBox();
             fillMonthBox();
             this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
+            this.mniNewEntry.IsEnabled = categories.categories.Count > 0;
             updateData();
         }
 
@@ -128,6 +129,7 @@ namespace MoneyViewerPro
             categoryWindow.ShowDialog();
             fillCategoriesBox();
             this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
+            this.mniNewEntry.IsEnabled = categories.categories.Count > 0;
             changes = true;
             updateData();
         }

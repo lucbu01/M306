@@ -33,7 +33,7 @@ namespace MoneyViewerPro
             {
                 if(string.IsNullOrWhiteSpace(txbName.Text))
                 {
-                    MessageBox.Show(this, "Diese Kategorie existiert bereits", "Hinzufügen nicht möglich", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(this, "Bitte geben Sie der Kategorie einen Namen", "Hinzufügen nicht möglich", MessageBoxButton.OK, MessageBoxImage.Error);
                 } else
                 {
                     this.categories.addCategory(new Category(txbName.Text, txbDescription.Text));

@@ -21,7 +21,7 @@
             </MenuItem>
             <MenuItem Header="_Bearbeiten">
                 <MenuItem Header="Neue _Kategorie" Click="btnNewCategory_Click" />
-                <MenuItem Header="Neuer _Eintrag" Click="btnNewEntry_Click"/>
+                <MenuItem Header="Neuer _Eintrag" Click="btnNewEntry_Click" Name="mniNewEntry"/>
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1">
