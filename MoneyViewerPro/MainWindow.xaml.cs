@@ -46,10 +46,12 @@ namespace MoneyViewerPro
             this.entries = new EntryList();
             this.categories = new CategoryList();
             this.btnNewEntry.IsEnabled = false;
+            this.mniNewEntry.IsEnabled = false;
             fillMonths();
             fillCategoriesBox();
             fillYearBox();
             fillMonthBox();
+            setTitle();
         }
 
         public MainWindow(EntryList entries, CategoryList categories)
@@ -62,7 +64,9 @@ namespace MoneyViewerPro
             fillYearBox();
             fillMonthBox();
             this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
+            this.mniNewEntry.IsEnabled = categories.categories.Count > 0;
             updateData();
+            setTitle();
         }
 
         public MainWindow(EntryList entries, CategoryList categories, string filename, string password)
@@ -80,6 +84,7 @@ namespace MoneyViewerPro
             this.btnNewEntry.IsEnabled = categories.categories.Count > 0;
             this.mniNewEntry.IsEnabled = categories.categories.Count > 0;
             updateData();
+            setTitle();
         }
 
         private void fillMonths()
@@ -179,6 +184,7 @@ namespace MoneyViewerPro
                 this.mniSave.IsEnabled = true;
                 changes = false;
             }
+            setTitle();
             return startWindow.Successful;
         }
 
@@ -262,6 +268,11 @@ namespace MoneyViewerPro
             updateData();
         }
 
+        private void setTitle()
+        {
+            this.Title = (string.IsNullOrEmpty(filename) ? "Neue Datei" : filename) + (string.IsNullOrEmpty(password) ? "" : " (verschlüsselt)") + " - Money Viewer Pro";
+        }
+
         private void updateData() {
             getCmbValues();
             setBudget();
@@ -275,12 +286,12 @@ namespace MoneyViewerPro
         }
 
         private void initalizeDatagrid() {
-            dgBudget.ItemsSource = filterEntryList(entries.entries); ;
+            dgBudget.ItemsSource = filterEntryList(entries.entries);
         }
 
         private List<Entry> filterEntryList(List<Entry> entries)
         {
-            List<Entry> entriesList = entries;
+            List<Entry> entriesList = new List<Entry>(entries);
             if (year != null)
             {
                 entriesList = entriesList.Where(x => x.dateTime.Year == Int32.Parse(year)).ToList();
